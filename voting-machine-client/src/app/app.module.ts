@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { VotingMachineComponent } from './voting-machine/voting-machine.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { VotingMachineChartComponent } from './voting-machine/voting-machine-chart.component';
+import { VotingMachineTableComponent } from './voting-machine/voting-machine-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VotingMachineComponent,
     HeaderComponent,
-    VotingMachineChartComponent
+    VotingMachineChartComponent,
+    VotingMachineTableComponent
   ],
   imports: [
     BrowserModule,
