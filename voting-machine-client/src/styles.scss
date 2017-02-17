@@ -26,9 +26,9 @@ body {
     }
     app-voting-machine {
         .container-fluid {
-        margin-top:50px;
+        margin-top:6.25rem;
         .voting-button{
-            height:320px;
+            height:20rem;
             cursor: pointer;
         }
         @for $i from 1 through length($colors) {
@@ -40,12 +40,9 @@ body {
         app-voting-machine-table {
     }
     }
-    
-    
-    
     app-voting-machine-chart {
         position: relative;
-            top:100vh;
+            top:18vh;
         .container {
             height:100vh;
             
