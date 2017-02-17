@@ -22,7 +22,9 @@ html {
 }
 body {
     app-header {
-
+        .navbar {
+            margin-left:45px;
+        }
     }
     app-voting-machine {
         .container-fluid {
