@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "./node_modules/bootstrap/scss/_variables.scss";
 @import "./node_modules/bootstrap/scss/mixins/_breakpoints.scss";
-$colors: red, green, yellow, blue;
+$colors: #AA7739, #323776, #28536C, #AA8C39;
 html {
     width: 98%;
     @include media-breakpoint-up(xs) {
@@ -30,21 +30,34 @@ body {
         .container-fluid {
         margin-top:6.25rem;
         padding:0 1.875rem;
+        .btn-primary {
+            cursor: pointer;
+        }
         .row {
             margin: 0;
         .voting-button{
             padding: 0;
             height:20rem;
             cursor: pointer;
+            h5 {
+                margin-top: 1.25rem;
+            }
         }
         @for $i from 1 through length($colors) {
         .voting-button:nth-child(#{$i}){
             background: lighten(nth($colors, $i), 20%);
+            outline: 1px solid darken(nth($colors, $i), 10%);
+            &:hover {
+                background: nth($colors, $i);
+            }
         }
         }
         }
         }
         app-voting-machine-table {
+            .container {
+                margin-top: 2.188rem;
+            }
     }
     }
     app-voting-machine-chart {
