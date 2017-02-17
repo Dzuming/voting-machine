@@ -27,13 +27,18 @@ body {
     app-voting-machine {
         .container-fluid {
         margin-top:6.25rem;
+        padding:0 1.875rem;
+        .row {
+            margin: 0;
         .voting-button{
+            padding: 0;
             height:20rem;
             cursor: pointer;
         }
         @for $i from 1 through length($colors) {
         .voting-button:nth-child(#{$i}){
             background: lighten(nth($colors, $i), 20%);
+        }
         }
         }
         }
