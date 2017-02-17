@@ -6,12 +6,14 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { VotingMachineComponent } from './voting-machine/voting-machine.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { VotingMachineChartComponent } from './voting-machine/voting-machine-chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     VotingMachineComponent,
-    HeaderComponent
+    HeaderComponent,
+    VotingMachineChartComponent
   ],
   imports: [
     BrowserModule,
