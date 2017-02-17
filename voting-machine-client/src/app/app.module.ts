@@ -4,10 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import { VotingMachineComponent } from './voting-machine/voting-machine.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VotingMachineComponent
   ],
   imports: [
     BrowserModule,
