@@ -7,6 +7,7 @@ class QuestionMapper extends Mapper
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         $questions_from_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return json_encode($questions_from_db);
+        $random_question = $questions_from_db[rand(0, count($questions_from_db) - 1)];
+        return json_encode($random_question);
     }
 }
