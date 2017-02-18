@@ -7,11 +7,8 @@ class AnswerMapper extends Mapper
             from answers a
             join questions q on (q.question_id = a.question_id)";
         $stmt = $this->db->query($sql);
-        $results = [];
-        while($row = $stmt->fetch()) {
-            $results[] = new AnswerEntity($row);
-        }
-        return $results;
+        $answers_from_db = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return json_encode($answers_from_db) ;
     }
     /**
      * Get one ticket by its ID

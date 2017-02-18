@@ -6,12 +6,8 @@ class QuestionMapper extends Mapper
             from questions q";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
-        $results = [];
-        $user_from_db = $stmt->fetchObject();
-        while($row = $stmt->fetch()) {
-            $results[] = new QuestionEntity($row);
-        }
-        return json_encode($user_from_db) ;
+        $questions_from_db = $stmt->fetchObject();
+        return json_encode($questions_from_db) ;
     }
     /**
      * Get one ticket by its ID
