@@ -7,7 +7,7 @@ import { Answer } from '../models/answer.model';
 export class RestService {
   private productUrl: string = 'http://localhost:8080/public/index.php/';
   constructor(private http: Http) { }
-  getQuestions(): Observable<Question> {
+  getQuestion(): Observable<Question> {
         return this.http.get(this.productUrl + 'questions')
             .map(this.extractData)
             .catch(this.handleError);

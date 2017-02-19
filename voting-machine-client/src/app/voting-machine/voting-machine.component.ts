@@ -14,10 +14,10 @@ export class VotingMachineComponent implements OnInit {
   constructor(private restService: RestService) { }
 
   ngOnInit() {
-    this.getQuestions();
+    this.getQuestion();
   }
-  private getQuestions() {
-    this.restService.getQuestions()
+  private getQuestion() {
+    this.restService.getQuestion()
       .subscribe(
       data => this.question = data,
       error => this.errorMessage = <any>error,
