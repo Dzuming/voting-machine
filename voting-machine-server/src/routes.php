@@ -17,4 +17,9 @@ $app->get('/answers', function (Request $request, Response $response) {
     $answers = $mapper->getAnswers();
     return $answers;
 });
+$app->post("/answers", function ($request, $response) {
+    $this->logger->addInfo("Answer save");
+    $mapper = new AnswerMapper($this->db);
+    $answer = $mapper->saveAnswer($request->getParsedBody());
+});
 $app->run();

@@ -24,4 +24,21 @@ class AnswerMapper extends Mapper
         });
         return array_values($sum);
     }
+    public function saveAnswer($body) {
+        $sql = "INSERT INTO answers (question_id, answer_A, answer_B, answer_C, answer_D) VALUES ( :question_id, :answer_A, :answer_B, :answer_C, :answer_D);";
+        $stmt = $this->db->prepare($sql);
+        $form_data =$body;
+        $question_id=$form_data['question_id'];
+        $answer_A=$form_data['answer_A'];
+        $answer_B=$form_data['answer_B'];
+        $answer_C=$form_data['answer_C'];
+        $answer_D=$form_data['answer_D'];
+        $stmt->bindParam(':question_id', $question_id, PDO::PARAM_INT);
+        $stmt->bindParam(':answer_A', $answer_A);
+        $stmt->bindParam(':answer_B', $answer_B);
+        $stmt->bindParam(':answer_C', $answer_C);
+        $stmt->bindParam(':answer_D', $answer_D);
+        $stmt->execute();
+        
+    }
 }
