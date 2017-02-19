@@ -22,6 +22,6 @@ class AnswerMapper extends Mapper
             isset($a[$b['question']]) ? $a[$b['question']]['answer_D'] += $b['answer_D'] : $a[$b['question']] = $b;
             return $a;
         });
-        return $sum;
+        return array_values($sum);
     }
 }

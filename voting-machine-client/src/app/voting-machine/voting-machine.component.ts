@@ -11,17 +11,17 @@ import { Question } from '../shared/models/question.model';
 export class VotingMachineComponent implements OnInit {
   public question: Object = Question;
   private errorMessage: string;
-  constructor(private restService:RestService) { }
+  constructor(private restService: RestService) { }
 
   ngOnInit() {
-    this.getQuestion();
+    this.getQuestions();
   }
-private getQuestion() {
-        this.restService.getQuestion()
-            .subscribe(
-            data => this.question = data,
-            error => this.errorMessage = <any>error,
-            );
-    }
-    
+  private getQuestions() {
+    this.restService.getQuestions()
+      .subscribe(
+      data => this.question = data,
+      error => this.errorMessage = <any>error,
+    );
+  }
 }
+

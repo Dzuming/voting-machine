@@ -10,26 +10,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr role="row">
-                <td style="width:65%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </td>
-                <td style="width:9%">21%</td>
-                <td style="width:9%">25%</td>
-                <td style="width:9%">30%</td>
-                <td style="width:9%">32%</td>
-            </tr>
-            <tr role="row">
-                <td style="width:60%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </td>
-                <td style="width:10%">21%</td>
-                <td style="width:10%">25%</td>
-                <td style="width:10%">30%</td>
-                <td style="width:10%">32%</td>
-            </tr>
-            <tr role="row">
-                <td style="width:60%">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris </td>
-                <td style="width:10%">21%</td>
-                <td style="width:10%">25%</td>
-                <td style="width:10%">30%</td>
-                <td style="width:10%">32%</td>
+            <tr role="row" *ngFor="let answer of answers">
+                <td style="width:65%">{{answer.question}}</td>
+                <td style="width:9%">{{answer.answer_A}}%</td>
+                <td style="width:9%">{{answer.answer_B}}%</td>
+                <td style="width:9%">{{answer.answer_C}}%</td>
+                <td style="width:9%">{{answer.answer_D}}%</td>
             </tr>
         </tbody>
     </table>

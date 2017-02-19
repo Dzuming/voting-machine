@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Question } from '../models/question.model';
+import { Answer } from '../models/answer.model';
 @Injectable()
 export class RestService {
   private productUrl: string = 'http://localhost:8080/public/index.php/';
   constructor(private http: Http) { }
-  getQuestion(): Observable<Question> {
+  getQuestions(): Observable<Question> {
         return this.http.get(this.productUrl + 'questions')
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    getAnswers(): Observable<Answer[]> {
+        return this.http.get(this.productUrl + 'answers')
             .map(this.extractData)
             .catch(this.handleError);
     }
