@@ -39,6 +39,17 @@ body {
             .navbar-toggler {
                 margin-top:1rem;
             }
+            .navbar-collapse {
+                margin-top:25px;
+                background-color:#f7f7f7;
+                li {
+                    &::last-of-type {
+                        border-bottom: 1px solid black;
+                    }
+                    border-top: 1px solid black;
+                }
+                
+            }
         }
     }
     app-voting-machine {
