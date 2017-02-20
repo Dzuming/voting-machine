@@ -30,7 +30,8 @@ export class VotingMachineComponent implements OnInit {
     );
   }
   public addAnswer(event) {
-    let answer_A = 0,
+    let question:any = this.question,
+      answer_A = 0,
       answer_B = 0,
       answer_C = 0,
       answer_D = 0
@@ -38,7 +39,7 @@ export class VotingMachineComponent implements OnInit {
       answer_A = 1
     }
     this.answer = {
-      'question_id': 1,
+      'question_id': question.question_id,
       'answer_A': answer_A,
       'answer_B': answer_B,
       'answer_C': answer_C,
