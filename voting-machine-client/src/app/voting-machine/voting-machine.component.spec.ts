@@ -4,14 +4,16 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { VotingMachineComponent } from './voting-machine.component';
-
+import { AppModule } from '../app.module';
 describe('VotingMachineComponent', () => {
   let component: VotingMachineComponent;
   let fixture: ComponentFixture<VotingMachineComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ VotingMachineComponent ]
+      imports: [
+        AppModule
+      ]
     })
     .compileComponents();
   }));
