@@ -17,7 +17,7 @@ describe('RestService', () => {
       { provide: XHRBackend, useClass: MockBackend }]
     });
   });
-   it('should create rest.service', inject([RestService], (service: RestService) => {
+   it('Should create rest.service', inject([RestService], (service: RestService) => {
     expect(service instanceof RestService).toBeTruthy();
   }));
    it('Should instantiate service with "new"', inject([Http], (http: Http) => {
@@ -25,4 +25,21 @@ describe('RestService', () => {
     let service = new RestService(http);
     expect(service instanceof RestService).toBe(true, 'new service should be ok');
   }));
+  it('Should get question', inject([RestService], (service: RestService) => {
+    expect(service.getQuestion()).toBeTruthy();
+  }));
+  it('Should get answers', inject([RestService], (service: RestService) => {
+    expect(service.getAnswers()).toBeTruthy();
+  }));
+  // it('Should post answer', inject([RestService], (service: RestService) => {
+  //   let value = [{
+  //     answer_id: 2,
+  //     question: "test",
+  //     answer_A:1,
+  //     answer_B:1,
+  //     answer_C:1,
+  //     answer_D:1,
+  //   }]
+  //   expect(service.addAnswer(value).toBeTruthy();
+  // }));
 });
