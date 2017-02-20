@@ -3,10 +3,13 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Question } from '../models/question.model';
 import { Answer } from '../models/answer.model';
+import { CalculateService } from './calculate.service';
 @Injectable()
 export class RestService {
   private productUrl: string = 'http://localhost:8080/public/index.php/';
-  constructor(private http: Http) { }
+  public answers: Array<any>;
+  public errorMessage: string;
+  constructor(private http: Http, private calculateService: CalculateService) { }
   getQuestion(): Observable<Question> {
         return this.http.get(this.productUrl + 'questions')
             .map(this.extractData)
@@ -17,8 +20,8 @@ export class RestService {
             .map(this.extractData)
             .catch(this.handleError);
     }
-    addAnswer(product): Observable<Answer> {
-        let body = JSON.stringify(product);
+    addAnswer(answer): Observable<Answer> {
+        let body = JSON.stringify(answer);
         let headers = new Headers({
             'Content-Type': 'application/json',
         });
@@ -27,6 +30,14 @@ export class RestService {
             .map(this.extractData)
             .catch(this.handleError);
     }
+    public get() {
+    this.getAnswers()
+      .subscribe(
+      data => this.answers = data,
+      error => this.errorMessage = <any>error,
+      () => this.calculateService.convertToPercentage(this.answers)
+      );
+  }
     private extractData(res: Response) {
         let body = res.json();
         return body || {};

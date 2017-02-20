@@ -9,7 +9,6 @@ import { HeaderComponent } from './shared/header/header.component';
 import { VotingMachineChartComponent } from './voting-machine/voting-machine-chart.component';
 import { VotingMachineTableComponent } from './voting-machine/voting-machine-table.component';
 
-import { RestService } from './shared/services/rest.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +22,6 @@ import { RestService } from './shared/services/rest.service';
     FormsModule,
     HttpModule
   ],
-  providers: [RestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

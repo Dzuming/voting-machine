@@ -21,5 +21,6 @@ $app->post("/answers", function ($request, $response) {
     $this->logger->addInfo("Answer save");
     $mapper = new AnswerMapper($this->db);
     $answer = $mapper->saveAnswer($request->getParsedBody());
+    echo json_encode($answer);
 });
 $app->run();
