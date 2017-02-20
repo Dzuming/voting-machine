@@ -34,10 +34,13 @@ export class VotingMachineComponent implements OnInit {
       answer_A = 0,
       answer_B = 0,
       answer_C = 0,
-      answer_D = 0
+      answer_D = 0,
+      selectedElement = event.currentTarget.children[0].innerHTML,
+      splitElement = selectedElement.split('_');
     if (event.currentTarget.children[0].innerHTML === "Answer A") {
       answer_A = 1
     }
+    question['answer'+ splitElement[1]] = 1;
     this.answer = {
       'question_id': question.question_id,
       'answer_A': answer_A,
