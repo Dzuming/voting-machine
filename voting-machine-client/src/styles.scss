@@ -36,6 +36,9 @@ body {
             .nav-link {
                 font-size: 1.25rem;
             }
+            .navbar-toggler {
+                margin-top:1rem;
+            }
         }
     }
     app-voting-machine {
@@ -56,6 +59,9 @@ body {
                     h5 {
                         margin-top: 1.25rem;
                     }
+                    @include media-breakpoint-down(sm) { 
+                        height: 10vh;
+                     }
                 }
                 @for $i from 1 through length($colors) {
                     .voting-button:nth-child(#{$i}) {
@@ -70,8 +76,13 @@ body {
         }
         app-voting-machine-table {
             .container {
-                margin-top: 2.3rem;
+                margin-top: 0.5rem;
                 padding-right: 0;
+                @include media-breakpoint-down(lg) { 
+                        padding-left:0;
+                        margin-left:0;
+                        width:100%
+                     }
                 .table-striped {
                     border: 1px solid #9C9C9C;
                     margin-bottom: 0 !important;
@@ -100,7 +111,7 @@ body {
     }
     app-voting-machine-chart {
         position: relative;
-        top: 10vh;
+        top: 25vh;
         .container {
             height: 100vh;
         }
