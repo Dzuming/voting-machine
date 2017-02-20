@@ -24,8 +24,8 @@ html {
         font-size: 16px;
     }
 }
-
 body {
+    position: relative;
     app-header {
         .navbar {
             margin: 0 2.813rem;
@@ -42,9 +42,17 @@ body {
         }
     }
     app-voting-machine {
+        .offset:before { 
+  display: block; 
+  content: " "; 
+  height: 200px;     
+  margin-top: -200px;    
+  visibility: hidden; 
+            }
         .container-fluid {
             margin-top: 5rem;
             padding: 0 1.875rem;
+            
             .btn-primary {
                 cursor: pointer;
                 outline: 1px solid black;
