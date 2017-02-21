@@ -10,7 +10,12 @@ export class RestService {
     public answers: Array<any>;
     public errorMessage: string;
     constructor(private http: Http, private calculateService: CalculateService) { }
-    getQuestion(): Observable<Question> {
+    getRandomQuestion(): Observable<Question> {
+        return this.http.get(this.productUrl + 'questions/random')
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    getQuestions(): Observable<Question> {
         return this.http.get(this.productUrl + 'questions')
             .map(this.extractData)
             .catch(this.handleError);
@@ -29,14 +34,6 @@ export class RestService {
         return this.http.post(this.productUrl + 'answers', body, options)
             .map(this.extractData)
             .catch(this.handleError);
-    }
-    public get() {
-        this.getAnswers()
-            .subscribe(
-            data => this.answers = data,
-            error => this.errorMessage = <any>error,
-            () => this.calculateService.convertToPercentage(this.answers)
-            );
     }
     private extractData(res: Response) {
         const body = res.json();
