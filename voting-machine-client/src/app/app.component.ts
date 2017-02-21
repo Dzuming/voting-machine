@@ -6,7 +6,8 @@ import 'rxjs/add/operator/map';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-   ngOnInit() {
+  public title = 'app works!';
+  ngOnInit() {
   }
-  title = 'app works!';
+
 }

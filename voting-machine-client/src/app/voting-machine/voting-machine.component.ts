@@ -20,9 +20,9 @@ export class VotingMachineComponent implements OnInit {
 
   ngOnInit() {
     this.getQuestion();
-    this.getAnswers()
+    this.getAnswers();
   }
-  private getQuestion() {
+  public getQuestion() {
     this.restService.getQuestion()
       .subscribe(
       data => this.question = data,
@@ -30,19 +30,19 @@ export class VotingMachineComponent implements OnInit {
     );
   }
   public addAnswer(event) {
-    let question:any = this.question,
-      answer_A = 0,
+    const question: any = this.question;
+    let answer_A = 0,
       answer_B = 0,
       answer_C = 0,
-      answer_D = 0
-    if (event.currentTarget.children[0].innerHTML === "Answer A") {
-      answer_A = 1
-    } else if (event.currentTarget.children[0].innerHTML === "Answer B") {
-      answer_B = 1
-    } else if (event.currentTarget.children[0].innerHTML === "Answer C") {
-      answer_C = 1
+      answer_D = 0;
+    if (event.currentTarget.children[0].innerHTML === 'Answer A') {
+      answer_A = 1;
+    } else if (event.currentTarget.children[0].innerHTML === 'Answer B') {
+      answer_B = 1;
+    } else if (event.currentTarget.children[0].innerHTML === 'Answer C') {
+      answer_C = 1;
     } else {
-      answer_D = 1
+      answer_D = 1;
     }
     this.answer = {
       'question_id': question.question_id,
@@ -50,7 +50,7 @@ export class VotingMachineComponent implements OnInit {
       'answer_B': answer_B,
       'answer_C': answer_C,
       'answer_D': answer_D,
-    }
+    };
     this.restService.addAnswer(this.answer)
       .subscribe(
       data => {
@@ -64,8 +64,8 @@ export class VotingMachineComponent implements OnInit {
       .subscribe(
       data => this.answers = data,
       error => this.errorMessage = <any>error,
-      () =>  this.calculateService.convertToPercentage(this.answers),
-      );
+      () => this.calculateService.convertToPercentage(this.answers),
+    );
   }
 
 }

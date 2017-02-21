@@ -5,7 +5,7 @@ import { Answer } from '../shared/models/answer.model';
   templateUrl: './voting-machine-table.component.html',
 })
 export class VotingMachineTableComponent implements OnInit {
-  @Input()  answers:Answer[];
+  @Input() answers: Answer[];
   constructor() { }
 
   ngOnInit() {
