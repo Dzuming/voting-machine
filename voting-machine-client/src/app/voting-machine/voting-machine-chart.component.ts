@@ -12,25 +12,40 @@ import * as d3 from 'd3';
   ]
 })
 export class VotingMachineChartComponent implements OnInit {
-  public answers: Answer[];
-  public selectedAnswerNumber:Number = 0;
+  @Input() answers: Answer[];
+  public hmm: Answer[];
   public errorMessage: String;
+  public g: any;
+  public current;
+  public pie;
+  public arc: any;
   constructor(private restService: RestService, private calculateService: CalculateService) { }
 
   ngOnInit() {
-    this.getAnswers(this.selectedAnswerNumber);
+    this.getAnswers(0);
   }
-  rawDataChart(setData:any):any {
-    return [{ 'Answer': setData.answer_A, 'Category': 'Answer A' },
-            { 'Answer': setData.answer_B, 'Category': 'Answer B' },
-            { 'Answer': setData.answer_C, 'Category': 'Answer C' },
-            { 'Answer': setData.answer_D, 'Category': 'Answer D' }
-    ];
+  rawDataChart(setData: any): any {
+    let values:Array<Object> = [];
+    let i = 0
+    for (let el in setData) {
+      if (setData.hasOwnProperty(el) && el !== "answer_id" && el !== "question" && setData[el] > 0) {
+        values.push({ 'Answer': setData[el], 'Category': el })
+      }
+    }
+    return values;
   }
-  createChart(data) {
-    const  width = 360;
-    const  height = 360;
-    const  radius = Math.min(width, height) / 2;
+  // rawDataChart(setData: any): any {
+  //   return [
+  //     { 'Answer': setData.answer_A, 'Category': 'Answer A' },
+  //     { 'Answer': setData.answer_B, 'Category': 'Answer B' },
+  //     { 'Answer': setData.answer_C, 'Category': 'Answer C' },
+  //     { 'Answer': setData.answer_D, 'Category': 'Answer D' }
+  //   ];
+  // }
+  createPieChart(data) {
+    const width = 360;
+    const height = 360;
+    const radius = Math.min(width, height) / 2;
     const color = d3.scaleOrdinal(d3.schemeCategory20b);
     let svg = d3.select('#pie-chart')
       .append('svg')
@@ -38,43 +53,43 @@ export class VotingMachineChartComponent implements OnInit {
       .attr('height', height)
       .append('g')
       .attr('transform', 'translate(' + (width / 2) + ',' + (height / 2) + ')');
-    let arc: any = d3.arc()
+    this.arc = d3.arc()
       .innerRadius(0)
       .outerRadius(radius);
-    var pie = d3.pie()
+    this.pie = d3.pie()
       .value(function (d: any) { return d.Answer; })
       .sort(null)
       (this.rawDataChart(data));
-      console.log(this.rawDataChart(data))
-    let g = svg.selectAll('path')
-      .data(pie)
+    this.g = svg.selectAll('path')
+      .data(this.pie)
       .enter()
       .append('g')
-      .attr('class', arc)
-      g.append('path')
-      .attr('d', arc)
+      .attr('class', this.arc)
+    this.g.append('path')
+      .attr('d', this.arc)
       .style('fill', (d: any) => color(d.data.Category))
-      .style('stroke', (d: any) => color(d.data.Category));
-    g.append('text')
-      .attr('transform', (d) => 'translate(' + arc.centroid(d) + ')')
+      .style('stroke', (d: any) => color(d.data.Category))
+    this.g.append('text')
+      .attr('transform', (d) => 'translate(' + this.arc.centroid(d) + ')')
       .attr('text-anchor', 'middle')
-      .text((d: any) => d.value + "%")
+      .text((d: any) =>d.data.Category + ' ' + d.value + "%")
       .style('fill', '#fff');
-
   }
   public getAnswers(number) {
     this.restService.getAnswers()
       .subscribe(
-      data => this.answers = data,
+      data => this.hmm = data,
       error => this.errorMessage = <any>error,
-      () => {this.calculateService.convertToPercentage(this.answers),
-        this.createChart(this.answers[number])},
+      () => {
+        this.calculateService.convertToPercentage(this.hmm),
+          this.createPieChart(this.hmm[number])
+      },
     );
   }
-  SumofSingleCategories(dataChart): any {
-    return d3.nest().key((d: any) => d.answer)
-      .rollup((value): any => d3.sum(value, (d: any) => d.answer))
-      .entries(dataChart);
-  }
-
+  updatePieChart(data) {
+    d3.select('svg')
+      .remove()
+      .exit();
+    this.getAnswers(data);
+  };
 }

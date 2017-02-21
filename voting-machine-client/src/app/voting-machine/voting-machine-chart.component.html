@@ -1,3 +1,13 @@
 <div id="Charts" class="container">
+  <select #answer (change) = "updatePieChart(answer.value)" >
+    <option *ngFor="let answer of answers; let i = index" [selected]="index == 0" [value]="i">{{answer.question}}</option>
+</select>
+<div class="row">
+        <div class="col col-xs-12 col-lg-6">
   <div id="pie-chart"></div>
+  </div>
+   <div class="col col-xs-12 col-lg-6">
+  <div id="bar-chart"></div>
+  </div>
+  </div>
 </div>
