@@ -21,7 +21,7 @@ export class CalculateService {
   }
   public convertToPercentage(value) {
     if (Object.keys(value).length === 0 && value.constructor === Object) {
-      return; ;
+      return;
     }
     let sum: Array<any> = this.sumAnswerValues(value)
     value.map((element, index) => {
