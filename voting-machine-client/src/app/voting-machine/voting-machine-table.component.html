@@ -9,7 +9,7 @@
                 <th style="width:9%">D</th>
             </tr>
         </thead>
-        <tbody *ngIf="answers === true">
+        <tbody>
             <tr role="row" *ngFor="let answer of answers">
                 <td style="width:65%">{{answer.question}}</td>
                 <td style="width:9%">{{answer.answer_A}}%</td>
