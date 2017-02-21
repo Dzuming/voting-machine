@@ -6,7 +6,7 @@ import { Answer } from '../models/answer.model';
 import { CalculateService } from './calculate.service';
 @Injectable()
 export class RestService {
-  private productUrl: string = 'http://localhost:8080/public/index.php/';
+  private productUrl: string = 'http://46.101.130.122/voting-machine-server/public/index.php/';
   public answers: Array<any>;
   public errorMessage: string;
   constructor(private http: Http, private calculateService: CalculateService) { }

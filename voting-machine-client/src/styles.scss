@@ -24,6 +24,7 @@ html {
         font-size: 16px;
     }
 }
+
 body {
     position: relative;
     app-header {
@@ -37,33 +38,31 @@ body {
                 font-size: 1.25rem;
             }
             .navbar-toggler {
-                margin-top:1rem;
+                margin-top: 1rem;
             }
             .navbar-collapse {
-                margin-top:25px;
-                background-color:#f7f7f7;
+                margin-top: 25px;
+                background-color: #f7f7f7;
                 li {
                     &::last-of-type {
                         border-bottom: 1px solid black;
                     }
                     border-top: 1px solid black;
                 }
-                
             }
         }
     }
     app-voting-machine {
-        .offset:before { 
-  display: block; 
-  content: " "; 
-  height: 200px;     
-  margin-top: -200px;    
-  visibility: hidden; 
-            }
+        .offset:before {
+            display: block;
+            content: " ";
+            height: 200px;
+            margin-top: -200px;
+            visibility: hidden;
+        }
         .container-fluid {
             margin-top: 5rem;
             padding: 0 1.875rem;
-            
             .btn-primary {
                 cursor: pointer;
                 outline: 1px solid black;
@@ -78,9 +77,9 @@ body {
                     h5 {
                         margin-top: 1.25rem;
                     }
-                    @include media-breakpoint-down(sm) { 
+                    @include media-breakpoint-down(sm) {
                         height: 10vh;
-                     }
+                    }
                 }
                 @for $i from 1 through length($colors) {
                     .voting-button:nth-child(#{$i}) {
@@ -95,13 +94,13 @@ body {
         }
         app-voting-machine-table {
             .container {
-                margin-top: 0.5rem;
+                margin-top: 2.313rem;
                 padding-right: 0;
-                @include media-breakpoint-down(lg) { 
-                        padding-left:0;
-                        margin-left:0;
-                        width:100%
-                     }
+                @include media-breakpoint-down(lg) {
+                    padding-left: 0;
+                    margin-left: 0;
+                    width: 100%
+                }
                 .table-striped {
                     border: 1px solid #9C9C9C;
                     margin-bottom: 0 !important;
