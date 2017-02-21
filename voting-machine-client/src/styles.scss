@@ -41,13 +41,19 @@ body {
                 margin-top: 1rem;
             }
             .navbar-collapse {
-                margin-top: 25px;
-                background-color: #f7f7f7;
+                
+                
+                @include media-breakpoint-down(sm) {
+                    background-color: #f7f7f7;
+                    margin-top: 25px;
                 li {
-                    &::last-of-type {
-                        border-bottom: 1px solid black;
+                    &:last-child {
+                        border: solid #C8C8C8;
+                        border-width: 0 1px 1px 1px;
+                    } &:first-child {
+                            border: 1px solid #C8C8C8;
                     }
-                    border-top: 1px solid black;
+                }
                 }
             }
         }
