@@ -8,6 +8,5 @@ export class VotingMachineTableComponent implements OnInit {
   @Input() answers: Answer[];
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 }

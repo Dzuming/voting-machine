@@ -19,38 +19,51 @@ export class VotingMachineComponent implements OnInit {
   public randomQuestion: Object = Question;
   public answer: Object = Question;
   public answers: Answer[];
-  public questionNumber: Number;
-  public Observ;
+  public questionNumber: number;
   private errorMessage: string;
+
   constructor(private restService: RestService, private calculateService: CalculateService, private chartService: ChartService) { }
 
   ngOnInit() {
-    
+
     this.getQuestions();
   }
-  public getRandomQuestion() {
+  getRandomQuestion() {
     this.restService.getRandomQuestion()
       .subscribe(
-      data => { this.randomQuestion = data 
-                this.getQuestionNumber() 
-    },
+      data => {
+        this.randomQuestion = data;
+        this.getQuestionNumber();
+      },
       error => this.errorMessage = <any>error,
-      ()=> { 
-        this.updateCharts(this.questionNumber) }
-    );
+      () => {
+        this.updateCharts(this.questionNumber);
+      }
+      );
   }
-  public getQuestions() {
+  getQuestions() {
     this.restService.getQuestions()
       .subscribe(
       data => this.questions = data,
       error => this.errorMessage = <any>error,
       () => {
         this.getRandomQuestion();
-      this.getAnswers(this.questionNumber);}
-    );
+        this.getAnswers(this.questionNumber);
+      }
+      );
   }
-  public addAnswer(event) {
+  addAnswer(event) {
     const question: any = this.randomQuestion;
+    this.getAnswerAfterClick(question.question_id, event);
+    this.restService.addAnswer(this.answer)
+      .subscribe(
+      data => { this.getQuestionNumber(); },
+      error => this.errorMessage = <any>error,
+      () => this.updateCharts(this.questionNumber)
+      );
+  }
+
+  getAnswerAfterClick(id: number, event: any) {
     let answer_A = 0,
       answer_B = 0,
       answer_C = 0,
@@ -65,58 +78,45 @@ export class VotingMachineComponent implements OnInit {
       answer_D = 1;
     }
     this.answer = {
-      'question_id': question.question_id,
+      'question_id': id,
       'answer_A': answer_A,
       'answer_B': answer_B,
       'answer_C': answer_C,
       'answer_D': answer_D,
     };
-    this.restService.addAnswer(this.answer)
-      .subscribe(
-      data => { this.getQuestionNumber() },
-      error => this.errorMessage = <any>error,
-      ()=> this.updateCharts(this.questionNumber) 
-    );
   }
   getQuestionNumber() {
     if (!this.randomQuestion) {
       return;
     }
-    let tempQuestion:any;
+    let tempQuestion: any;
     tempQuestion = this.questions;
-    let tempRandomQuestion:any = this.randomQuestion;
+    const tempRandomQuestion: any = this.randomQuestion;
     tempQuestion.map((value, index) => {
       for (const el in value) {
         if (tempRandomQuestion.question === value.question) {
-          return this.questionNumber =  index;
+          return this.questionNumber = index;
         }
       }
-    })
+    });
   }
-  questionNumberObservable() {
-    this.Observ = Observable.create(function (observer) {
-    observer.next();
-    observer.complete(this.questionNumber);
-    return function () {  };
-});
-  }
-  public getAnswers(dataNumber?) {
+  public getAnswers(number?: number) {
     this.restService.getAnswers()
       .subscribe(
       data => this.answers = data,
       error => this.errorMessage = <any>error,
       () => {
-        this.calculateService.convertToPercentage(this.answers)
-        if (dataNumber >= 0) {
-          this.chartService.createPieChart(this.answers[dataNumber], this.questions);
-          this.chartService.createBarChart(this.answers[dataNumber], this.questions);
+        this.calculateService.convertToPercentage(this.answers);
+        if (number >= 0) {
+          this.chartService.createPieChart(this.answers[number], this.questions);
+          this.chartService.createBarChart(this.answers[number], this.questions);
         }
 
-      })
+      });
   }
-  updateCharts(data) {
-    this.chartService.updateCharts()
-    return this.getAnswers(data)
+  updateCharts(number: number) {
+    this.chartService.updateCharts();
+    return this.getAnswers(number);
   }
 }
 

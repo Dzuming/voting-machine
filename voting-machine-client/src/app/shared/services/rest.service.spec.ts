@@ -25,8 +25,8 @@ describe('RestService', () => {
     const service = new RestService(http);
     expect(service instanceof RestService).toBe(true, 'new service should be ok');
   }));
-  it('Should get question', inject([RestService], (service: RestService) => {
-    expect(service.getQuestion()).toBeTruthy();
+  it('Should get rando question', inject([RestService], (service: RestService) => {
+    expect(service.getRandomQuestion()).toBeTruthy();
   }));
   it('Should get answers', inject([RestService], (service: RestService) => {
     expect(service.getAnswers()).toBeTruthy();

@@ -17,20 +17,21 @@ import * as d3 from 'd3';
 export class VotingMachineChartComponent implements OnInit {
   @Input() answers: Answer[];
   @Input() questions: Question[];
-  @Input() randomQuestion: Object = Question
+  @Input() randomQuestion: Object = Question;
   public singleAnswer: Object = Answer;
   private allAnswers: Answer[];
   private errorMessage: String;
-  
+
   constructor(private restService: RestService, private calculateService: CalculateService, private chartService: ChartService) { }
-  ngOnInit() {
-  }
-  public getAnswers(number) {
+
+  ngOnInit() { }
+
+  getAnswers(number: number) {
     this.restService.getAnswers()
       .subscribe(
       data => {
         this.allAnswers = data;
-        this.calculateService.convertToPercentage(this.allAnswers)
+        this.calculateService.convertToPercentage(this.allAnswers);
       },
       error => this.errorMessage = <any>error,
       () => {
@@ -40,8 +41,9 @@ export class VotingMachineChartComponent implements OnInit {
       },
     );
   }
+
   updateCharts(data) {
-    this.chartService.updateCharts()
-    return this.getAnswers(data)
+    this.chartService.updateCharts();
+    return this.getAnswers(data);
   }
 }

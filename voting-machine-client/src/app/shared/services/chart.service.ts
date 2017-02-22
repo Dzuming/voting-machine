@@ -5,26 +5,22 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ChartService {
   private g: any;
-  private current;
   private pie;
   private arc: any;
   private readonly color = d3.scaleOrdinal(d3.schemeCategory20b);
+
   constructor() { }
 
-  ngOnInit() {
-
-  }
-  rawDataChart(setData: any, questions): any {
+  rawDataChart(setData: any, questions: Array<any>): any {
     const values: Array<Object> = [];
     let tempQuestion: Object;
-    
     questions.map((value) => {
       for (const el in value) {
         if (setData.question === value.question) {
-          tempQuestion = value
+          tempQuestion = value;
         }
       }
-    })
+    });
     for (const el in setData) {
       if (setData.hasOwnProperty(el) && el !== 'answer_id' && el !== 'question' && setData[el] > 0) {
         values.push({ 'Answer': setData[el], 'Category': tempQuestion[el] });
@@ -32,7 +28,8 @@ export class ChartService {
     }
     return values;
   }
-  createPieChart(data, questions) {
+
+  createPieChart(data: any, questions: any) {
     const width = 360,
       height = 360,
       radius = Math.min(width, height) / 2,
@@ -65,7 +62,7 @@ export class ChartService {
       .style('fill', '#fff');
   }
 
-  createBarChart(dataset, questions) {
+  createBarChart(dataset: any, questions: any) {
     const margin = { top: 20, right: 20, bottom: 30, left: 100 },
       width = 500 - margin.left - margin.right,
       height = 400 - margin.top - margin.bottom,
@@ -100,6 +97,7 @@ export class ChartService {
     svg.append('g')
       .call(d3.axisLeft(y));
   }
+
   updateCharts() {
     d3.selectAll('svg')
       .remove()

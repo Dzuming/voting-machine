@@ -3,8 +3,10 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class CalculateService {
+
   constructor(private http: Http) { }
-  public sumAnswerValues(value) {
+
+   sumAnswerValues(value: Array<any>) {
     let sum: Number;
     const sumArray: Array<Number> = [];
     value.map(element => {
@@ -18,7 +20,8 @@ export class CalculateService {
     });
     return sumArray;
   }
-  public convertToPercentage(value) {
+
+   convertToPercentage(value: Array<any>) {
     if (Object.keys(value).length === 0 && value.constructor === Object) {
       return;
     };
