@@ -4,6 +4,7 @@ import { CalculateService } from '../shared/services/calculate.service';
 import { ChartService } from '../shared/services/chart.service';
 import { Question } from '../shared/models/question.model';
 import { Answer } from '../shared/models/answer.model';
+import { Observable } from 'rxjs/Observable';
 @Component({
   selector: 'app-voting-machine',
   templateUrl: './voting-machine.component.html',
@@ -19,20 +20,23 @@ export class VotingMachineComponent implements OnInit {
   public answer: Object = Question;
   public answers: Answer[];
   public questionNumber: Number;
+  public Observ;
   private errorMessage: string;
   constructor(private restService: RestService, private calculateService: CalculateService, private chartService: ChartService) { }
 
   ngOnInit() {
-    this.getRandomQuestion();
-    this.getQuestions();
-    this.getAnswers();
     
+    this.getQuestions();
   }
   public getRandomQuestion() {
     this.restService.getRandomQuestion()
       .subscribe(
-      data => this.randomQuestion = data,
+      data => { this.randomQuestion = data 
+                this.getQuestionNumber() 
+    },
       error => this.errorMessage = <any>error,
+      ()=> { 
+        this.updateCharts(this.questionNumber) }
     );
   }
   public getQuestions() {
@@ -40,7 +44,9 @@ export class VotingMachineComponent implements OnInit {
       .subscribe(
       data => this.questions = data,
       error => this.errorMessage = <any>error,
-      () => this.test()
+      () => {
+        this.getRandomQuestion();
+      this.getAnswers(this.questionNumber);}
     );
   }
   public addAnswer(event) {
@@ -67,12 +73,15 @@ export class VotingMachineComponent implements OnInit {
     };
     this.restService.addAnswer(this.answer)
       .subscribe(
-      data => { this.test() },
+      data => { this.getQuestionNumber() },
       error => this.errorMessage = <any>error,
       ()=> this.updateCharts(this.questionNumber) 
     );
   }
-  test() {
+  getQuestionNumber() {
+    if (!this.randomQuestion) {
+      return;
+    }
     let tempQuestion:any;
     tempQuestion = this.questions;
     let tempRandomQuestion:any = this.randomQuestion;
@@ -83,6 +92,13 @@ export class VotingMachineComponent implements OnInit {
         }
       }
     })
+  }
+  questionNumberObservable() {
+    this.Observ = Observable.create(function (observer) {
+    observer.next();
+    observer.complete(this.questionNumber);
+    return function () {  };
+});
   }
   public getAnswers(dataNumber?) {
     this.restService.getAnswers()

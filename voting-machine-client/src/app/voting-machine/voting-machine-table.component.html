@@ -2,20 +2,20 @@
     <table class="table table-striped">
         <thead class="thead-default">
             <tr>
-                <th style="width:65%">Question</th>
-                <th style="width:9%">A</th>
-                <th style="width:9%">B</th>
-                <th style="width:9%">C</th>
-                <th style="width:9%">D</th>
+                <th>Question</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
             </tr>
         </thead>
         <tbody>
             <tr role="row" *ngFor="let answer of answers">
-                <td style="width:65%">{{answer.question}}</td>
-                <td style="width:9%">{{answer.answer_A}}%</td>
-                <td style="width:9%">{{answer.answer_B}}%</td>
-                <td style="width:9%">{{answer.answer_C}}%</td>
-                <td style="width:9%">{{answer.answer_D}}%</td>
+                <td>{{answer.question}}</td>
+                <td>{{answer.answer_A}}%</td>
+                <td>{{answer.answer_B}}%</td>
+                <td>{{answer.answer_C}}%</td>
+                <td>{{answer.answer_D}}%</td>
             </tr>
         </tbody>
     </table>

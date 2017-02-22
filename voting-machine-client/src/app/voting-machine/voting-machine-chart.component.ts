@@ -18,13 +18,12 @@ export class VotingMachineChartComponent implements OnInit {
   @Input() answers: Answer[];
   @Input() questions: Question[];
   @Input() randomQuestion: Object = Question
-  @Input() questionNumber: Number;
   public singleAnswer: Object = Answer;
   private allAnswers: Answer[];
   private errorMessage: String;
+  
   constructor(private restService: RestService, private calculateService: CalculateService, private chartService: ChartService) { }
   ngOnInit() {
-    this.getAnswers(0);
   }
   public getAnswers(number) {
     this.restService.getAnswers()
@@ -35,7 +34,6 @@ export class VotingMachineChartComponent implements OnInit {
       },
       error => this.errorMessage = <any>error,
       () => {
-        console.log(this.questionNumber);
         this.singleAnswer = this.allAnswers[number];
         this.chartService.createPieChart(this.singleAnswer, this.questions);
         this.chartService.createBarChart(this.singleAnswer, this.questions);

@@ -1,143 +1,156 @@
-/* You can add global styles to this file, and also import other style files */
-
-@import "./node_modules/bootstrap/scss/_variables.scss";
-@import "./node_modules/bootstrap/scss/mixins/_breakpoints.scss";
-$colors: #AA7739,
-#323776,
-#28536C,
-#AA8C39;
-html {
-    width: 100%;
-    @include media-breakpoint-up(xs) {
-        font-size: 12px;
-    }
-    @include media-breakpoint-up(sm) {
-        font-size: 13px;
-    }
-    @include media-breakpoint-up(md) {
-        font-size: 14px;
-    }
-    @include media-breakpoint-up(lg) {
-        font-size: 15px;
-    }
-    @include media-breakpoint-up(xl) {
-        font-size: 16px;
-    }
-}
-
-body {
-    position: relative;
-    app-header {
-        .navbar {
-            margin: 0 2.813rem;
-            height: 6.25rem;
-            .navbar-brand {
-                font-size: 2.188rem;
+        /* You can add global styles to this file, and also import other style files */
+        
+        @import "./node_modules/bootstrap/scss/_variables.scss";
+        @import "./node_modules/bootstrap/scss/mixins/_breakpoints.scss";
+        $colors: #AA7739,
+        #323776,
+        #28536C,
+        #AA8C39;
+        html {
+            width: 100%;
+            @include media-breakpoint-up(xs) {
+                font-size: 12px;
             }
-            .nav-link {
-                font-size: 1.25rem;
+            @include media-breakpoint-up(sm) {
+                font-size: 13px;
             }
-            .navbar-toggler {
-                margin-top: 1rem;
+            @include media-breakpoint-up(md) {
+                font-size: 14px;
             }
-            .navbar-collapse {
-                
-                
-                @include media-breakpoint-down(sm) {
-                    background-color: #f7f7f7;
-                    margin-top: 25px;
-                li {
-                    &:last-child {
-                        border: solid #C8C8C8;
-                        border-width: 0 1px 1px 1px;
-                    } &:first-child {
-                            border: 1px solid #C8C8C8;
-                    }
-                }
-                }
+            @include media-breakpoint-up(lg) {
+                font-size: 15px;
+            }
+            @include media-breakpoint-up(xl) {
+                font-size: 16px;
             }
         }
-    }
-    app-voting-machine {
-        .offset:before {
-            display: block;
-            content: " ";
-            height: 200px;
-            margin-top: -200px;
-            visibility: hidden;
-        }
-        .container-fluid {
-            margin-top: 5rem;
-            padding: 0 1.875rem;
-            .btn-primary {
-                cursor: pointer;
-                outline: 1px solid black;
-                border-radius: 0;
-            }
-            .row {
-                margin: 0;
-                .voting-button {
-                    padding: 0;
-                    height: 25vh;
-                    cursor: pointer;
-                    h5 {
-                        margin-top: 1.25rem;
+        
+        body {
+            position: relative;
+            app-header {
+                .navbar {
+                    margin: 0 2.813rem;
+                    height: 6.25rem;
+                    .navbar-brand {
+                        font-size: 2.188rem;
                     }
-                    @include media-breakpoint-down(sm) {
-                        height: 10vh;
+                    .nav-link {
+                        font-size: 1.25rem;
                     }
-                }
-                @for $i from 1 through length($colors) {
-                    .voting-button:nth-child(#{$i}) {
-                        background: lighten(nth($colors, $i), 20%);
-                        outline: 1px solid darken(nth($colors, $i), 10%);
-                        &:hover {
-                            background: nth($colors, $i);
-                        }
+                    .navbar-toggler {
+                        margin-top: 1rem;
                     }
-                }
-            }
-        }
-        app-voting-machine-table {
-            .container {
-                margin-top: 2.313rem;
-                padding-right: 0;
-                @include media-breakpoint-down(lg) {
-                    padding-left: 0;
-                    margin-left: 0;
-                    width: 100%
-                }
-                .table-striped {
-                    border: 1px solid #9C9C9C;
-                    margin-bottom: 0 !important;
-                    thead {
-                        display: block;
-                        tr {
-                            outline: 1px solid #9C9C9C;
-                            th:last-child {
-                                min-width: 5.375rem;
-                            }
-                        }
-                    }
-                    tbody {
-                        max-height: 50vh;
-                        display: block;
-                        overflow-y: auto;
-                        tr:not(:first-of-type) {
-                            td {
-                                border-top: 1px solid #9C9C9C
+                    .navbar-collapse {
+                        @include media-breakpoint-down(sm) {
+                            background-color: #f7f7f7;
+                            margin-top: 25px;
+                            li {
+                                &:last-child {
+                                    border: solid #C8C8C8;
+                                    border-width: 0 1px 1px 1px;
+                                }
+                                &:first-child {
+                                    border: 1px solid #C8C8C8;
+                                }
                             }
                         }
                     }
                 }
             }
+            app-voting-machine {
+                .offset:before {
+                    display: block;
+                    content: " ";
+                    height: 200px;
+                    margin-top: -200px;
+                    visibility: hidden;
+                }
+                .container-fluid {
+                    margin-top: 5rem;
+                    padding: 0 1.875rem;
+                    .btn-primary {
+                        cursor: pointer;
+                        outline: 1px solid black;
+                        border-radius: 0;
+                    }
+                    .row {
+                        margin: 0;
+                        .voting-button {
+                            padding: 0;
+                            height: 25vh;
+                            cursor: pointer;
+                            h5 {
+                                margin-top: 1.25rem;
+                            }
+                            @include media-breakpoint-down(sm) {
+                                height: 10vh;
+                            }
+                        }
+                        @for $i from 1 through length($colors) {
+                            .voting-button:nth-child(#{$i}) {
+                                background: lighten(nth($colors, $i), 20%);
+                                outline: 1px solid darken(nth($colors, $i), 10%);
+                                &:hover {
+                                    background: nth($colors, $i);
+                                }
+                            }
+                        }
+                    }
+                }
+                app-voting-machine-table {
+                    .container {
+                        margin-top: 2.313rem;
+                        padding-right: 0;
+                        overflow: auto;
+                        max-height: 58vh;
+                        @include media-breakpoint-down(lg) {
+                            padding-left: 0;
+                            margin-left: 0;
+                            width: 100%
+                        }
+                        .table-striped {
+                            border: 1px solid #9C9C9C;
+                            margin-bottom: 0 !important;
+                            thead {
+                                tr {
+                                    outline: 1px solid #9C9C9C;
+                                    th:last-child {
+                                        min-width: 5.375rem;
+                                    }
+                                }
+                            }
+                            tbody {
+                                tr:not(:first-of-type) {
+                                    td {
+                                        border-top: 1px solid #9C9C9C
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            app-voting-machine-chart {
+                position: relative;
+                top: 5vh;
+                @include media-breakpoint-up(lg) {
+                    top: 25vh;
+                }
+                .container {
+                    height: 100vh;
+                    @include media-breakpoint-up(md) {
+                        select {
+                            margin-top: 6.25rem;
+                        }
+                        .row {
+                            margin-top: 6.25rem;
+                        }
+                    }
+                    #pie-chart {
+                        @include media-breakpoint-down(lg) {
+                            margin-left: 20%;
+                        }
+                    }
+                }
+            }
         }
-    }
-    app-voting-machine-chart {
-        position: relative;
-        top: 25vh;
-        .container {
-            height: 100vh;
-        }
-    }
-}
